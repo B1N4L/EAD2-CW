@@ -1,0 +1,15 @@
+# Netlify deploys only the React frontend, in demo mode (no backend services).
+[build]
+  base = "Frontend/frontend-app"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  VITE_DEMO_MODE = "true"
+
+# Single-page app: let React Router handle every path, so refreshing /bookings works.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

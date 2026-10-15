@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock } from 'react-icons/fa'; // Import icons
+import { DEMO_MODE } from "../../demo/mode.js";
+import { DEMO_LOGIN } from "../../demo/seed.js";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -35,6 +37,11 @@ function Login() {
                 <h3 className="text-center font-weight-light my-4">Employee Login</h3>
               </div>
               <div className="card-body">
+                {DEMO_MODE && (
+                  <div className="alert alert-info text-center small">
+                    Demo login: <strong>{DEMO_LOGIN.email}</strong> / <strong>{DEMO_LOGIN.password}</strong>
+                  </div>
+                )}
                 <form onSubmit={handleSubmit}>
                   {/* Email Input */}
                   <div className="form-floating mb-3">

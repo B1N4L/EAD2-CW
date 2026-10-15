@@ -21,7 +21,7 @@ import AddEmployee from './pages/employees/AddEmployees.jsx';
 import ViewEmployee from './pages/employees/ViewEmployees.jsx';
 import EditEmployee from './pages/employees/EditEmployees.jsx';
 
-import Reviews from './pages/reviews/reviews.jsx';
+import Reviews from './pages/reviews/Reviews.jsx';
 import AddReview from './pages/reviews/AddReviews.jsx';
 import ViewReview from './pages/reviews/ViewReviews.jsx';
 
