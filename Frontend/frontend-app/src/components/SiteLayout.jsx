@@ -20,6 +20,8 @@ function Brand() {
 
 // Navbar, footer and WhatsApp button shared by every page.
 export default function SiteLayout({ children }) {
+  const skyline = photoUrl("footer_bg_img.webp");
+
   return (
     <div className="d-flex flex-column min-vh-100">
       <Navbar expand="lg" variant="dark" className="site-nav py-3" collapseOnSelect>
@@ -46,7 +48,14 @@ export default function SiteLayout({ children }) {
 
       <main className="flex-fill">{children}</main>
 
-      <footer className="site-footer pt-5 pb-4 mt-5">
+      {/* Sri Lanka skyline from the old site's footer, tinted to the footer colour */}
+      {skyline ? (
+        <div className="footer-skyline mt-5" aria-hidden="true" style={{ "--skyline": `url(${skyline})` }} />
+      ) : (
+        <div className="mt-5" />
+      )}
+
+      <footer className="site-footer pt-4 pb-4">
         <Container>
           <div className="row g-4">
             <div className="col-lg-4">
