@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import SiteLayout from "../../components/SiteLayout";
 import PageBand from "../../components/PageBand";
+import Photo from "../../components/Photo";
 import usePageTitle from "../../components/usePageTitle";
+import formatDate from "../../components/formatDate";
 import { BLOGS } from "../../data/blogs";
 
 export default function Blogs() {
@@ -16,12 +18,17 @@ export default function Blogs() {
       </PageBand>
 
       <div className="container py-5">
-        <div className="row g-3">
+        <div className="row g-4">
           {BLOGS.map((post) => (
             <div className="col-md-6 col-lg-4" key={post.slug}>
-              <Link to={`/${post.slug}`} className="panel blog-card p-4 h-100 d-flex flex-column text-decoration-none">
-                <h2 className="h6 text-body flex-fill mb-3">{post.title}</h2>
-                <span className="small fw-medium d-inline-flex align-items-center gap-2">Read article <FaArrowRight /></span>
+              <Link to={`/${post.slug}`} className="card tour-card blog-card h-100 text-decoration-none">
+                <Photo name={post.cover} alt={post.shortTitle} className="card-img-top" />
+                <div className="card-body d-flex flex-column p-4">
+                  <span className="small text-secondary mb-2">{formatDate(post.date)}</span>
+                  <h2 className="h6 text-body mb-2">{post.shortTitle}</h2>
+                  <p className="small text-secondary text-clamp-3 flex-fill">{post.excerpt}</p>
+                  <span className="small fw-medium d-inline-flex align-items-center gap-2 text-primary">Read article <FaArrowRight /></span>
+                </div>
               </Link>
             </div>
           ))}

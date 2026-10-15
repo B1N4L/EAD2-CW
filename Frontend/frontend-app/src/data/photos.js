@@ -10,7 +10,7 @@ const PHOTOS = Object.fromEntries(Object.entries(photoFiles).map(([path, url]) =
 
 export const photoUrl = (name) => (name ? PHOTOS[name] ?? null : null);
 
-// Gallery photos, sorted by file name.
+// Gallery photos, sorted by file name (2.webp before 10.webp).
 export const GALLERY = Object.entries(galleryFiles)
-  .sort(([a], [b]) => a.localeCompare(b))
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
   .map(([path, url]) => ({ name: fileName(path), url }));

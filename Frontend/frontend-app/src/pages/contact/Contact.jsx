@@ -6,8 +6,9 @@ import PageBand from "../../components/PageBand";
 import usePageTitle from "../../components/usePageTitle";
 import { SITE, whatsappLink } from "../../data/site";
 import { PACKAGES, RAMAYANA } from "../../data/packages";
+import { CONTACT } from "../../data/pages";
 
-const TOURS = [...PACKAGES, RAMAYANA];
+const TOURS = [...PACKAGES.map((p) => ({ slug: p.slug, title: p.cardTitle ?? p.title })), { slug: RAMAYANA.slug, title: "Ramayana Trail Sri Lanka" }];
 
 // No server needed: the form builds a WhatsApp (or email) message from what the visitor typed.
 function buildMessage({ name, email, phone, tour, message }) {
@@ -55,7 +56,7 @@ export default function Contact() {
   return (
     <SiteLayout>
       <PageBand eyebrow="Contact us" title="Let's plan your trip">
-        Send us a message with your dates, group size and the places you'd like to see. We usually reply on WhatsApp within a few hours.
+        Send us a message with your dates, group size and the places you'd like to see. {CONTACT.responseNote}
       </PageBand>
 
       <div className="container py-5">

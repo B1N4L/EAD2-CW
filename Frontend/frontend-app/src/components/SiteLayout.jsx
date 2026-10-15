@@ -8,8 +8,8 @@ import { PACKAGES, RAMAYANA } from "../data/packages";
 import { photoUrl } from "../data/photos";
 
 function Brand() {
-  const logo = photoUrl("tours_999_logo.png");
-  if (logo) return <img src={logo} alt={SITE.name} height="40" />;
+  const logo = photoUrl(SITE.logo);
+  if (logo) return <img src={logo} alt={SITE.name} height="48" />;
   return (
     <>
       <span className="brand-mark"><FaGlobeAsia /></span>
@@ -74,10 +74,11 @@ export default function SiteLayout({ children }) {
             <div className="col-6 col-lg-3">
               <h2 className="h6 text-white">Tour packages</h2>
               <ul className="list-unstyled small mb-0">
-                {PACKAGES.map((pkg) => (
-                  <li className="mb-1" key={pkg.slug}><Link to={`/${pkg.slug}`}>{pkg.title}</Link></li>
+                {PACKAGES.filter((pkg) => pkg.featured).map((pkg) => (
+                  <li className="mb-1" key={pkg.slug}><Link to={`/${pkg.slug}`}>{pkg.cardTitle}</Link></li>
                 ))}
-                <li><Link to={`/${RAMAYANA.slug}`}>{RAMAYANA.title}</Link></li>
+                <li className="mb-1"><Link to={`/${RAMAYANA.slug}`}>Ramayana Trail</Link></li>
+                <li><Link to="/itinerary">All tour packages</Link></li>
               </ul>
             </div>
             <div className="col-lg-3">
