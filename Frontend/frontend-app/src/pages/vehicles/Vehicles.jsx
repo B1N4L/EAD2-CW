@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import VehicleNavbar from '../../layout/vehicles/VehicleNavbar';
+import { Link } from 'react-router-dom';
+import { FaPlus, FaSearch } from 'react-icons/fa';
+import AdminLayout from '../../components/AdminLayout';
+import ListTable from '../../components/ListTable';
+import RowActions from '../../components/RowActions';
+import StatusBadge from '../../components/StatusBadge';
 
 export default function Vehicles(){
     const [vehicles, setVehicles]=useState([]);
-    const {id}= useParams()
+    const [loading, setLoading]=useState(true);
+    const [error, setError]=useState("");
+    const [search, setSearch]=useState("");
 
     useEffect(()=>{
-        console.log("code with binal");
         loadVehicles();
     }, [])
 
     const loadVehicles= async () => {
-        const result =await axios.get("http://localhost:8083/vehicle-api/vehicles");
-        console.log(result.data); 
-        setVehicles(result.data);
+        try {
+            const result =await axios.get("http://localhost:8083/vehicle-api/vehicles");
+            setVehicles(result.data);
+            setError("");
+        } catch {
+            setError("Couldn't reach the vehicle service.");
+        } finally {
+            setLoading(false);
+        }
     }
 
     const deleteVehicle= async(id)=>{
@@ -23,63 +34,49 @@ export default function Vehicles(){
         loadVehicles();
     }
 
+    const query = search.trim().toLowerCase();
+    const shown = vehicles.filter((vehicle) =>
+        [vehicle.name, vehicle.type, vehicle.status].some((field) => String(field ?? "").toLowerCase().includes(query))
+    );
+    const available = vehicles.filter((vehicle) => vehicle.status === "available").length;
+
     return(
-
-        <>
-        <VehicleNavbar/>
-        <div className='container'>
-
-        <div className="input-group rounded">
-            <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                <span className="input-group-text border-0" id="search-addon">
-                    <i className="fas fa-search"></i>
-                    </span>
+        <AdminLayout
+            title="Vehicles"
+            subtitle={loading ? " " : `${vehicles.length} vehicles · ${available} available`}
+            actions={<Link className="btn btn-primary btn-icon" to="/vehicles/add"><FaPlus /> Add vehicle</Link>}
+        >
+            <div className="input-group mb-3" style={{ maxWidth: "24rem" }}>
+                <span className="input-group-text bg-white"><FaSearch className="text-secondary" /></span>
+                <input type="search" className="form-control" placeholder="Search by name, type or status"
+                    aria-label="Search vehicles" value={search} onChange={(e) => setSearch(e.target.value)} />
             </div>
-            
-            <div className='py-4'>
-            <table className="table border shadow">
-                <thead>
-                <tr>
-                    <th scope="col">Vehicle ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Seats</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    vehicles.map((vehicle, index)=>(
-                                            <tr key={index}>
-                                                <th scope="row">{index+1}</th>
-                                                <td>{vehicle.name}</td>
-                                                <td>{vehicle.type}</td>
-                                                <td>{vehicle.status}</td>
-                                                <td>{vehicle.nseats}</td>
-                                                <td>
-                                                    <Link className='btn btn-primary mx-2' to={`/vehicles/view/${vehicle.id}`}>
-                                                        View
-                                                    </Link>
-                                                    <Link className="btn btn-outline-primary mx-2" to={`/vehicles/edit/${vehicle.id}`}>
-                                                        Edit
-                                                    </Link>
-                                                    <button className='btn btn-danger mx-2' onClick={()=>deleteVehicle(vehicle.id)}>
-                                                        Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            )) 
-                }
-                </tbody>
-            </table>
-            </div>
-        </div>
-        <div className="text-center mt-4 p-4">
-            <Link className="btn btn-outline-secondary" to="/admin">
-                Go Back
-            </Link>
-        </div>
-        </>
+
+            <ListTable
+                columns={["ID", "Name", "Type", "Seats", "Status", ""]}
+                loading={loading}
+                error={error}
+                isEmpty={shown.length === 0}
+                emptyText={query ? "No vehicles match your search." : "No vehicles yet."}
+            >
+                {shown.map((vehicle)=>(
+                    <tr key={vehicle.id}>
+                        <td className="text-secondary">#{vehicle.id}</td>
+                        <td className="fw-medium">{vehicle.name}</td>
+                        <td className="text-capitalize">{vehicle.type}</td>
+                        <td>{vehicle.nseats}</td>
+                        <td><StatusBadge status={vehicle.status} /></td>
+                        <td>
+                            <RowActions
+                                label={vehicle.name}
+                                viewTo={`/vehicles/view/${vehicle.id}`}
+                                editTo={`/vehicles/edit/${vehicle.id}`}
+                                onDelete={()=>deleteVehicle(vehicle.id)}
+                            />
+                        </td>
+                    </tr>
+                ))}
+            </ListTable>
+        </AdminLayout>
     );
 }

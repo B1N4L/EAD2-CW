@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import EmployeeNavbar from '../../layout/employees/EmployeeNavbar';
+import { Link } from 'react-router-dom';
+import { FaPlus } from 'react-icons/fa';
+import AdminLayout from '../../components/AdminLayout';
+import ListTable from '../../components/ListTable';
+import RowActions from '../../components/RowActions';
+import StatusBadge from '../../components/StatusBadge';
 
 export default function Employees(){
     const [employees, setEmployees]=useState([]);
-    const {id}= useParams()
+    const [loading, setLoading]=useState(true);
+    const [error, setError]=useState("");
 
     useEffect(()=>{
-        console.log("code with binal");
         loadEmployees();
     }, [])
 
     const loadEmployees= async () => {
-        const result =await axios.get("http://localhost:8081/employee-api/employees");
-        console.log(result.data); 
-        setEmployees(result.data);
+        try {
+            const result =await axios.get("http://localhost:8081/employee-api/employees");
+            setEmployees(result.data);
+            setError("");
+        } catch {
+            setError("Couldn't reach the employee service.");
+        } finally {
+            setLoading(false);
+        }
     }
 
     const deleteEmployee= async(id)=>{
@@ -24,54 +34,38 @@ export default function Employees(){
     }
 
     return(
-
-        <>
-        <EmployeeNavbar/>
-        <div className='container'>
-            <div className='py-4'>
-            <table className="table border shadow">
-                <thead>
-                <tr>
-                    <th scope="col">Employee ID</th>
-                    <th scope="col">name</th>
-                    <th scope="col">email</th>
-                    <th scope="col">role</th>
-                    <th scope="col">status</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    employees.map((employee, index)=>(
-                                            <tr key={index}>
-                                                <th scope="row">{index+1}</th>
-                                                <td>{employee.name}</td>
-                                                <td>{employee.email}</td>
-                                                <td>{employee.role}</td>
-                                                <td>{employee.status}</td>
-                                                <td>
-                                                    <Link className='btn btn-primary mx-2' to={`/employees/view/${employee.id}`}>
-                                                        View
-                                                    </Link>
-                                                    <Link className="btn btn-outline-primary mx-2" to={`/employees/edit/${employee.id}`}>
-                                                        Edit
-                                                    </Link>
-                                                    <button className='btn btn-danger mx-2' onClick={()=>deleteEmployee(employee.id)}>
-                                                        Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            )) 
-                }
-                </tbody>
-            </table>
-            </div>
-        </div>
-        <div className="text-center mt-4 p-4">
-            <Link className="btn btn-outline-secondary" to="/admin">
-                Go Back
-            </Link>
-        </div>
-        </>
+        <AdminLayout
+            title="Employees"
+            subtitle={loading ? " " : `${employees.length} staff member${employees.length === 1 ? "" : "s"}`}
+            actions={<Link className="btn btn-primary btn-icon" to="/employees/add"><FaPlus /> Add employee</Link>}
+        >
+            <ListTable
+                columns={["ID", "Name", "Role", "Status", ""]}
+                loading={loading}
+                error={error}
+                isEmpty={employees.length === 0}
+                emptyText="No employees yet."
+            >
+                {employees.map((employee)=>(
+                    <tr key={employee.id}>
+                        <td className="text-secondary">#{employee.id}</td>
+                        <td>
+                            <span className="fw-medium">{employee.name}</span>
+                            <span className="cell-sub">{employee.email}</span>
+                        </td>
+                        <td className="text-capitalize">{employee.role}</td>
+                        <td><StatusBadge status={employee.status} /></td>
+                        <td>
+                            <RowActions
+                                label={employee.name}
+                                viewTo={`/employees/view/${employee.id}`}
+                                editTo={`/employees/edit/${employee.id}`}
+                                onDelete={()=>deleteEmployee(employee.id)}
+                            />
+                        </td>
+                    </tr>
+                ))}
+            </ListTable>
+        </AdminLayout>
     );
 }

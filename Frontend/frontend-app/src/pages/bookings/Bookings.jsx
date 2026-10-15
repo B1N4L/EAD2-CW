@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import BookingNavbar from '../../layout/bookings/BookingNavbar';
+import { Link } from 'react-router-dom';
+import { FaPlus } from 'react-icons/fa';
+import AdminLayout from '../../components/AdminLayout';
+import ListTable from '../../components/ListTable';
+import RowActions from '../../components/RowActions';
 
 export default function Bookings(){
     const [bookings, setBookings]=useState([]);
-    const {id}= useParams()
+    const [loading, setLoading]=useState(true);
+    const [error, setError]=useState("");
 
     useEffect(()=>{
-        console.log("code with binal");
         loadBookings();
     }, [])
 
     const loadBookings= async () => {
-        const result =await axios.get("http://localhost:8082/booking-api/bookings");
-        console.log(result.data); 
-        setBookings(result.data);
+        try {
+            const result =await axios.get("http://localhost:8082/booking-api/bookings");
+            setBookings(result.data);
+            setError("");
+        } catch {
+            setError("Couldn't reach the booking service.");
+        } finally {
+            setLoading(false);
+        }
     }
 
     const deleteBooking= async(id)=>{
@@ -24,58 +33,40 @@ export default function Bookings(){
     }
 
     return(
-
-        <>
-        <BookingNavbar/>
-        <div className='container'>
-            <div className='py-4'>
-            <table className="table border shadow">
-                <thead>
-                <tr>
-                    <th scope="col">Booking ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Budget</th>
-                    <th scope="col">Pax count</th>
-                    <th scope="col">Arrival date</th>
-                    <th scope="col">Visiting days</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    bookings.map((booking, index)=>(
-                                            <tr key={index}>
-                                                <th scope="row">{index+1}</th>
-                                                <td>{booking.name}</td>
-                                                <td>{booking.email}</td>
-                                                <td>{booking.budget}</td>
-                                                <td>{booking.packCount}</td>
-                                                <td>{booking.date}</td>
-                                                <td>{booking.days}</td>
-                                                <td>
-                                                    <Link className='btn btn-primary mx-2' to={`/bookings/view/${booking.id}`}>
-                                                        View
-                                                    </Link>
-                                                    <Link className="btn btn-outline-primary mx-2" to={`/bookings/edit/${booking.id}`}>
-                                                        Edit
-                                                    </Link>
-                                                    <button className='btn btn-danger mx-2' onClick={()=>deleteBooking(booking.id)}>
-                                                        Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            )) 
-                }
-                </tbody>
-            </table>
-            </div>
-        </div>
-        <div className="text-center mt-4 p-4">
-            <Link className="btn btn-outline-secondary" to="/admin">
-                Go Back
-            </Link>
-        </div>
-        </>
+        <AdminLayout
+            title="Bookings"
+            subtitle={loading ? " " : `${bookings.length} customer booking${bookings.length === 1 ? "" : "s"}`}
+            actions={<Link className="btn btn-primary btn-icon" to="/bookings/add"><FaPlus /> New booking</Link>}
+        >
+            <ListTable
+                columns={["ID", "Guest", "Tour package", "Travellers", "Arrival", "Days", ""]}
+                loading={loading}
+                error={error}
+                isEmpty={bookings.length === 0}
+                emptyText="No bookings yet."
+            >
+                {bookings.map((booking)=>(
+                    <tr key={booking.id}>
+                        <td className="text-secondary">#{booking.id}</td>
+                        <td>
+                            <span className="fw-medium">{booking.name}</span>
+                            <span className="cell-sub">{booking.email}</span>
+                        </td>
+                        <td>{booking.budget}</td>
+                        <td>{booking.packCount}</td>
+                        <td className="text-nowrap">{booking.date}</td>
+                        <td>{booking.days}</td>
+                        <td>
+                            <RowActions
+                                label={`booking #${booking.id}`}
+                                viewTo={`/bookings/view/${booking.id}`}
+                                editTo={`/bookings/edit/${booking.id}`}
+                                onDelete={()=>deleteBooking(booking.id)}
+                            />
+                        </td>
+                    </tr>
+                ))}
+            </ListTable>
+        </AdminLayout>
     );
 }

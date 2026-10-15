@@ -42,14 +42,16 @@ import AddFleet from './pages/fleet/AddFleets.jsx';
 import ViewFleet from './pages/fleet/ViewFleets.jsx';
 import EditFleet from './pages/fleet/EditFleets.jsx';
 
-
+import NotFound from './pages/NotFound.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 
 
 function App() {
 
   return (
     <div className="App">
-      <Router> 
+      <Router>
+        <ScrollToTop/>
         <Routes>
 
           <Route index element={<Home/>}/>
@@ -93,6 +95,8 @@ function App() {
           {/*
           <Route exact path="/viewuser/:id"   element={<ViewUser/>}/>
           */}
+
+          <Route path="*" element={<NotFound/>}/>
 
         </Routes>
       </Router>

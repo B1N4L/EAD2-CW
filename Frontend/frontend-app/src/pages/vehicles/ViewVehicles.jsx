@@ -1,6 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { FaPen } from "react-icons/fa";
+import AdminLayout from "../../components/AdminLayout";
+import DetailList from "../../components/DetailList";
+import StatusBadge from "../../components/StatusBadge";
 
 export default function ViewVehicle() {
 
@@ -15,41 +19,32 @@ export default function ViewVehicle() {
 
     useEffect(() => {
         loadVehicle();
-    }, []); 
+    }, []);
 
     const loadVehicle = async () => {
         const result = await axios.get(`http://localhost:8083/vehicle-api/vehicles/${id}`);
-        console.log(result.data); 
         setVehicle(result.data);
     };
-    
+
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-                    <h2 className="text-center m-4">Vehicle Details</h2>
-                    <div className="card">
-                        <div className="card-header">
-                            Details of vehicle id:{vehicle.id}
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item">
-                                    <b>Vehicle Name:</b> {vehicle.name}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Type:</b> {vehicle.type}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Status:</b> {vehicle.status}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Seats:</b> {vehicle.nseats}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <Link className="btn btn-primary my-2" to="/vehicles">Back to Vehicles</Link>
-                </div>
+        <AdminLayout
+            title={vehicle.name || `Vehicle #${id}`}
+            subtitle={`Vehicle #${id}`}
+            actions={
+                <>
+                    <Link className="btn btn-primary btn-icon" to={`/vehicles/edit/${id}`}><FaPen /> Edit</Link>
+                    <Link className="btn btn-light" to="/vehicles">Back to vehicles</Link>
+                </>
+            }
+        >
+            <div className="panel p-4 p-lg-5" style={{ maxWidth: "52rem" }}>
+                <DetailList items={[
+                    { label: "Name", value: vehicle.name },
+                    { label: "Type", value: <span className="text-capitalize">{vehicle.type}</span> },
+                    { label: "Seats", value: vehicle.nseats },
+                    { label: "Status", value: <StatusBadge status={vehicle.status} /> },
+                ]} />
             </div>
-        </div>
+        </AdminLayout>
     );
 }

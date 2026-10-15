@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import AdminLayout from "../../components/AdminLayout";
+import DetailList from "../../components/DetailList";
 
 export default function ViewReview() {
 
@@ -16,41 +18,27 @@ export default function ViewReview() {
 
     useEffect(() => {
         loadReview();
-    }, []); 
+    }, []);
 
     const loadReview = async () => {
         const result = await axios.get(`http://localhost:8084/review-api/reviews/${id}`);
-        console.log(result.data); 
         setReview(result.data);
     };
-    
+
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-                    <h2 className="text-center m-4">Review Details</h2>
-                    <div className="card">
-                        <div className="card-header">
-                            Details of review id:{review.id}
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item">
-                                    <b>From:</b> {review.email}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Review Subject:</b> {review.subject}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Description:</b> {review.description}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Date:</b> {review.date}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <Link className="btn btn-primary my-2" to="/reviews">Back to Home</Link>
-                </div>
+        <AdminLayout
+            title={`Review #${id}`}
+            subtitle={review.subject}
+            actions={<Link className="btn btn-light" to="/reviews">Back to reviews</Link>}
+        >
+            <div className="panel p-4 p-lg-5" style={{ maxWidth: "52rem" }}>
+                <DetailList items={[
+                    { label: "From", value: review.email },
+                    { label: "Date", value: review.date },
+                    { label: "Subject", value: review.subject },
+                    { label: "Review", value: review.description },
+                ]} />
             </div>
-        </div>
+        </AdminLayout>
     );
 }

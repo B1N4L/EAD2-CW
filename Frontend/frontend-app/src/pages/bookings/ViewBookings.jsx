@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { FaPen } from "react-icons/fa";
+import AdminLayout from "../../components/AdminLayout";
+import DetailList from "../../components/DetailList";
 
 export default function ViewBooking() {
 
@@ -11,54 +14,41 @@ export default function ViewBooking() {
         packCount: "",
         date: "",
         days: ""
-        
+
     });
 
     const { id } = useParams();
 
     useEffect(() => {
         loadBooking();
-    }, []); 
+    }, []);
 
     const loadBooking = async () => {
         const result = await axios.get(`http://localhost:8082/booking-api/bookings/${id}`);
-        console.log(result.data); 
         setBooking(result.data);
     };
-    
+
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-                    <h2 className="text-center m-4">Booking Details</h2>
-                    <div className="card">
-                        <div className="card-header my-4">
-                            Details of booking id:{booking.id}
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item">
-                                    <b>Booking Name:</b> {booking.name}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>From:</b> {booking.email}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Budget type:</b> {booking.budget}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Pack Count:</b> {booking.packCount}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Arrival date:</b> {booking.date}
-                                </li>
-                                <li className="list-group-item">
-                                    <b>Visiting days:</b> {booking.days}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <Link className="btn btn-primary my-2" to="/bookings">Back to Booking</Link>
-                </div>
+        <AdminLayout
+            title={`Booking #${id}`}
+            subtitle={booking.name}
+            actions={
+                <>
+                    <Link className="btn btn-primary btn-icon" to={`/bookings/edit/${id}`}><FaPen /> Edit</Link>
+                    <Link className="btn btn-light" to="/bookings">Back to bookings</Link>
+                </>
+            }
+        >
+            <div className="panel p-4 p-lg-5" style={{ maxWidth: "52rem" }}>
+                <DetailList items={[
+                    { label: "Guest name", value: booking.name },
+                    { label: "Email", value: booking.email },
+                    { label: "Tour package", value: booking.budget },
+                    { label: "Travellers", value: booking.packCount },
+                    { label: "Arrival date", value: booking.date },
+                    { label: "Visiting days", value: booking.days },
+                ]} />
             </div>
-        </div>
+        </AdminLayout>
     );
 }

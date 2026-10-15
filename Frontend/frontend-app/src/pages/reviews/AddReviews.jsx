@@ -2,21 +2,18 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import HomeNavbar from '../../layout/home/HomeNavbar'
-
-
+import AdminLayout from '../../components/AdminLayout'
+import ReviewFields from './ReviewFields'
 
 export default function AddReview(){
 
     let navigate= useNavigate()
-    
+
     const [review, setReview]= useState({
         email: "",
         subject: "",
         description: ""
     });
-
-    const{email, subject, description}= review
 
     const onInputChange=(e)=>{
         setReview({...review, [e.target.name]: e.target.value})
@@ -27,40 +24,18 @@ export default function AddReview(){
         await axios.post("http://localhost:8084/review-api/reviews", review)
         navigate("/reviews")
     }
-    
+
     return (
-    <>
-    <HomeNavbar />
-    <div className="container">
-        <div className="row">
-            <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-                <h2 className="text-center m-4">Give us a review!</h2>
-
-                <form action="" onSubmit={(e) => onSubmit(e)}>
-                    <div className="mb-3">
-                        <label htmlFor="Email" className="form-label">Email</label>
-                        <input type="text" className="form-control" placeholder="Enter your email" name="email" value={email} onChange={(e) => onInputChange(e)} />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="Subject" className="form-label">Subject</label>
-                        <input type="text" className="form-control" placeholder="Enter your subject" name="subject" value={subject} onChange={(e) => onInputChange(e)} />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="Description" className="form-label">Description</label>
-                        <textarea className="form-control" placeholder="Enter your description" name="description" value={description} onChange={(e) => onInputChange(e)}>
-                        </textarea>
-                    </div>
-
-                    <button type="submit" className="btn btn-outline-primary">
-                        Submit
-                    </button>
-                    <Link className="btn btn-outline-danger mx-2" to="/">
-                        Cancel
-                    </Link>
-                </form>
-            </div>
+    <AdminLayout title="Add review" subtitle="Record feedback received by phone or email.">
+        <div className="panel p-4 p-lg-5" style={{ maxWidth: "52rem" }}>
+            <form onSubmit={(e) => onSubmit(e)}>
+                <ReviewFields review={review} onChange={(e) => onInputChange(e)} />
+                <div className="d-flex gap-2 mt-4">
+                    <button type="submit" className="btn btn-primary px-4">Save review</button>
+                    <Link className="btn btn-light" to="/reviews">Cancel</Link>
+                </div>
+            </form>
         </div>
-    </div>
-    </>
+    </AdminLayout>
     )
 }
