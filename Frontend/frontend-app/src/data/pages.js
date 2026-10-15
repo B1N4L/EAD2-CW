@@ -3,14 +3,11 @@
 export const HOME = {
   heroEyebrow: "Join with us for unforgettable Sri Lanka Tours across the captivating island!",
   heroTitle: "Experience Sri Lanka’s Beauty Like Never Before",
+  heroLead: "Private tours with your own English-speaking driver-guide: ancient cities, misty tea country, wildlife safaris and golden beaches, planned around you.",
+  // Mosaic beside the hero text: one tall photo, then two stacked.
+  heroPhotos: ["sigiriya_img_02.webp", "beach_01.webp", "ella_01.webp"],
+  // Wide photo used when a page is shared on WhatsApp, Facebook etc.
   heroPhoto: "slider_01.webp",
-  welcomeTitle: "Welcome to Explore Sri Lanka with Tours 999",
-  welcome: [
-    "Our travel agency offers exceptional Sri Lanka tours that immerse you in the island’s rich history, culture, and natural wonders. Whether you're seeking a thrilling Sri Lanka tour, a peaceful getaway, or an enriching Sri Lanka trip, we craft personalized itineraries tailored to your travel preferences.",
-    "With the experience of 6+ years in travel & Tourism in Sri Lanka, we pride ourselves on crafting unforgettable journeys, ensuring that every tour highlights the best of the island's stunning landscapes, cultural landmarks, and vibrant wildlife. From ancient ruins and sacred temples to pristine beaches and national parks, our Sri Lanka tours provide an enriching experience.",
-    "Let us help you plan the perfect Sri Lanka trip, where you'll discover the island’s beauty, history, and charm, guided by expert professionals. Contact us Today!",
-  ],
-  welcomePhoto: "home_page_about_img.webp",
   ramayanaEyebrow: "Rama Ravana Yudha, the clash of the Titans is a remarkable incident in the history of mankind",
   ramayanaText: "The Ramayana is a timeless epic written by the sage Valmiki, telling the story of Prince Rama and his journey of righteousness. Rama is exiled to the forest with his wife Sita and brother Lakshmana. During this time, the king Ravana abducts Sita, leading to a great battle. With the help of his allies, Rama defeats Ravana and restores justice. The Ramayana teaches important values like truth, duty, loyalty, and the victory of good over evil, inspiring generations across the world.",
   ramayanaPhoto: "ramayana_cover_photo.webp",
