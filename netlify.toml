@@ -1,4 +1,7 @@
 # Netlify settings for the Tours 999 static site (the React app in Frontend/frontend-app).
+# `npm run build` writes every page as its own HTML file (see scripts/prerender.mjs), so
+# old links like /about/ and /5-day-sri-lanka-tour-package/ are served directly, and any
+# other address gets 404.html with a proper 404 status.
 [build]
   base = "Frontend/frontend-app"
   command = "npm run build"
@@ -7,9 +10,13 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Single-page app: let React Router handle every path, so old links like /about/ and
-# /5-day-sri-lanka-tour-package/ load the right page.
+# The old WordPress home page also answered at /home/.
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/"
+  to = "/"
+  status = 301

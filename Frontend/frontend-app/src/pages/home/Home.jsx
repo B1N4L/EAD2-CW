@@ -4,7 +4,6 @@ import { FaArrowRight, FaCarSide, FaComments, FaGlobeAsia, FaHandshake, FaMapMar
 import SiteLayout from '../../components/SiteLayout';
 import PackageCard from '../../components/PackageCard';
 import Photo from '../../components/Photo';
-import usePageTitle from '../../components/usePageTitle';
 import { SITE, whatsappLink } from '../../data/site';
 import { HOME, WHY_US } from '../../data/pages';
 import { PACKAGES, RAMAYANA } from '../../data/packages';
@@ -21,7 +20,6 @@ const HERO_FACTS = [
 ];
 
 function Home() {
-  usePageTitle(null);
   const featured = PACKAGES.filter((pkg) => pkg.featured);
   const [mainPhoto, ...sidePhotos] = HOME.heroPhotos;
 

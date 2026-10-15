@@ -2,7 +2,6 @@ import React from "react";
 import SiteLayout from "../../components/SiteLayout";
 import PageBand from "../../components/PageBand";
 import PackageCard from "../../components/PackageCard";
-import usePageTitle from "../../components/usePageTitle";
 import { PACKAGES, RAMAYANA } from "../../data/packages";
 import { HOME } from "../../data/pages";
 
@@ -14,7 +13,6 @@ const ramayanaCard = {
 };
 
 export default function Packages() {
-  usePageTitle("Our Tour Packages");
 
   return (
     <SiteLayout>

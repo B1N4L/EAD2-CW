@@ -3,6 +3,7 @@
 export const SITE = {
   name: "Tours 999",
   domain: "tours999.com",
+  url: "https://tours999.com", // used for canonical links, the sitemap and social share previews
   phone: "+94 76 287 0074",
   phoneHref: "tel:+94762870074",
   whatsappNumber: "94762870074",

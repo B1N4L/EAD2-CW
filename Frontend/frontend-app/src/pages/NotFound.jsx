@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SiteLayout from "../components/SiteLayout";
-import usePageTitle from "../components/usePageTitle";
 
 export default function NotFound() {
-  usePageTitle("Page not found");
 
   return (
     <SiteLayout>

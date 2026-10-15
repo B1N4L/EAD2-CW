@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import SiteLayout from "../../components/SiteLayout";
 import Photo from "../../components/Photo";
-import usePageTitle from "../../components/usePageTitle";
 import { whatsappLink } from "../../data/site";
+import { getPreloaded } from "../../seo/preload";
 import { PACKAGES } from "../../data/packages";
 import formatDate from "../../components/formatDate";
 
@@ -28,11 +28,12 @@ function Block({ block }) {
 }
 
 export default function BlogPost({ post }) {
-  usePageTitle(post.title);
   const navigate = useNavigate();
-  const [blocks, setBlocks] = useState(null);
+  // On the first page load the text is already in the HTML; after moving between pages it's fetched.
+  const [blocks, setBlocks] = useState(() => getPreloaded(`article:${post.slug}`) ?? null);
 
   useEffect(() => {
+    if (blocks) return undefined;
     let cancelled = false;
     const load = ARTICLES[`../../content/blogs/${post.slug}.json`];
     (load ? load() : Promise.resolve([])).then((data) => { if (!cancelled) setBlocks(data); });

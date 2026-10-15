@@ -4,12 +4,10 @@ import { FaArrowRight } from "react-icons/fa";
 import SiteLayout from "../../components/SiteLayout";
 import PageBand from "../../components/PageBand";
 import Photo from "../../components/Photo";
-import usePageTitle from "../../components/usePageTitle";
 import formatDate from "../../components/formatDate";
 import { BLOGS } from "../../data/blogs";
 
 export default function Blogs() {
-  usePageTitle("Blogs");
 
   return (
     <SiteLayout>

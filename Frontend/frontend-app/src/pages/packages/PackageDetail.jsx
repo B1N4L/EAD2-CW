@@ -7,13 +7,11 @@ import PhotoStrip from "../../components/PhotoStrip";
 import Itinerary from "../../components/Itinerary";
 import IncludedList from "../../components/IncludedList";
 import EnquiryCard from "../../components/EnquiryCard";
-import usePageTitle from "../../components/usePageTitle";
 import { PACKAGES } from "../../data/packages";
 
 const FACT_ICONS = { "Duration": <FaRegClock />, "Tour Type": <FaRoute />, "Group Size": <FaUserFriends />, "Tour Guide": <FaUserTie /> };
 
 export default function PackageDetail({ pkg }) {
-  usePageTitle(pkg.title);
   const others = PACKAGES.filter((p) => p.slug !== pkg.slug);
   const [heading, ...paragraphs] = pkg.intro;
   const introHeading = heading?.type === "heading" ? heading.text : null;

@@ -5,11 +5,9 @@ import Photo from "../../components/Photo";
 import PhotoStrip from "../../components/PhotoStrip";
 import IncludedList from "../../components/IncludedList";
 import EnquiryCard from "../../components/EnquiryCard";
-import usePageTitle from "../../components/usePageTitle";
 import { RAMAYANA } from "../../data/packages";
 
 export default function RamayanaTrail() {
-  usePageTitle("Ramayana Trail Tour Sri Lanka from India");
   const [active, setActive] = useState(0);
   const [showFullStory, setShowFullStory] = useState(false);
   const variant = RAMAYANA.variants[active];

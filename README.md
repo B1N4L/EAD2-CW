@@ -43,6 +43,12 @@ npm run dev
 
 Open http://localhost:5173. `npm run build` produces the static files in `dist/`; [`netlify.toml`](netlify.toml) has the build settings for Netlify.
 
+## SEO
+
+`npm run build` writes every page as its own HTML file ([`scripts/prerender.mjs`](Frontend/frontend-app/scripts/prerender.mjs)), so search engines and WhatsApp/Facebook link previews see the full page without running JavaScript. Each page gets its own title, description, canonical URL, share image and schema.org data (travel agency, tours, blog posts, breadcrumbs), all defined in [`src/seo/routes.js`](Frontend/frontend-app/src/seo/routes.js). The build also writes `sitemap.xml`, `robots.txt` and a `404.html` that Netlify serves with a real 404 status.
+
+The site address used in canonical links and the sitemap is `url` in [`src/data/site.js`](Frontend/frontend-app/src/data/site.js).
+
 ## Tech
 
 React 18, Vite 5, React Router 6, Bootstrap 5 / React-Bootstrap, React Icons.

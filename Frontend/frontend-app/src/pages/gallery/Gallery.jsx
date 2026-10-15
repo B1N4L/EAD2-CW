@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 import { FaCamera } from "react-icons/fa";
 import SiteLayout from "../../components/SiteLayout";
 import PageBand from "../../components/PageBand";
-import usePageTitle from "../../components/usePageTitle";
 import { GALLERY } from "../../data/photos";
 
 export default function Gallery() {
-  usePageTitle("Gallery");
 
   return (
     <SiteLayout>

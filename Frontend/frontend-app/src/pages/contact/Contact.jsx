@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FaEnvelope, FaFacebookF, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import SiteLayout from "../../components/SiteLayout";
 import PageBand from "../../components/PageBand";
-import usePageTitle from "../../components/usePageTitle";
 import { SITE, whatsappLink } from "../../data/site";
 import { PACKAGES, RAMAYANA } from "../../data/packages";
 import { CONTACT } from "../../data/pages";
@@ -24,17 +23,16 @@ function buildMessage({ name, email, phone, tour, message }) {
 }
 
 export default function Contact() {
-  usePageTitle("Contact Us");
   const [searchParams] = useSearchParams();
   const packageFromLink = searchParams.get("package");
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    tour: TOURS.some((t) => t.slug === packageFromLink) ? packageFromLink : "",
-    message: "",
-  });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", tour: "", message: "" });
+
+  // Links like /contact/?package=5-day-sri-lanka-tour-package pre-select that tour. This runs after the
+  // first render so it also works on the pre-rendered page, which is built without the query string.
+  useEffect(() => {
+    if (TOURS.some((t) => t.slug === packageFromLink)) setForm((f) => ({ ...f, tour: packageFromLink }));
+  }, [packageFromLink]);
 
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 

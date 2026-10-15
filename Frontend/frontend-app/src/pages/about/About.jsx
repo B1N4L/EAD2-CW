@@ -5,12 +5,10 @@ import SiteLayout from "../../components/SiteLayout";
 import PageBand from "../../components/PageBand";
 import Photo from "../../components/Photo";
 import PhotoStrip from "../../components/PhotoStrip";
-import usePageTitle from "../../components/usePageTitle";
 import { SITE } from "../../data/site";
 import { ABOUT, WHY_US } from "../../data/pages";
 
 export default function About() {
-  usePageTitle("About Us");
 
   return (
     <SiteLayout>
