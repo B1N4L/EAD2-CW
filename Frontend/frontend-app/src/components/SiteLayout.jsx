@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { FaGlobeAsia } from "react-icons/fa";
+import PoweredBy from "./PoweredBy";
 
 // Navbar and footer shared by the public (customer-facing) pages.
 export default function SiteLayout({ children }) {
@@ -59,7 +60,10 @@ export default function SiteLayout({ children }) {
             </div>
           </div>
           <hr className="border-light opacity-25 my-4" />
-          <p className="small mb-0">&copy; {new Date().getFullYear()} Saman Tours. All rights reserved.</p>
+          <div className="d-flex flex-column flex-sm-row justify-content-between gap-2">
+            <p className="small mb-0">&copy; {new Date().getFullYear()} Saman Tours. All rights reserved.</p>
+            <PoweredBy />
+          </div>
         </Container>
       </footer>
     </div>

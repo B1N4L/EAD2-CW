@@ -210,6 +210,19 @@ h1, h2, h3, h4, h5, .display-4, .navbar-brand {
   color: #fff;
 }
 
+.powered-by a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.powered-by a:hover {
+  text-decoration: underline;
+}
+
+.auth-page .powered-by a {
+  color: #fff;
+}
+
 .page-band {
   background: var(--st-sand);
   border-bottom: 1px solid #efe7da;

@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { FaGlobeAsia, FaSignOutAlt } from "react-icons/fa";
+import PoweredBy from "./PoweredBy";
 
 const SECTIONS = [
   { to: "/admin", label: "Dashboard", end: true },
@@ -52,6 +53,13 @@ export default function AdminLayout({ title, subtitle, actions, children }) {
           </div>
         )}
         {children}
+      </Container>
+
+      <Container fluid="xl" className="pb-4">
+        <div className="d-flex flex-column flex-sm-row justify-content-between gap-1 border-top pt-3 text-secondary">
+          <p className="small mb-0">&copy; {new Date().getFullYear()} Saman Tours</p>
+          <PoweredBy />
+        </div>
       </Container>
     </div>
   );

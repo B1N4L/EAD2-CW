@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaEnvelope, FaGlobeAsia, FaLock } from 'react-icons/fa'; // Import icons
 import { DEMO_MODE } from "../../demo/mode.js";
 import { DEMO_LOGIN } from "../../demo/seed.js";
+import PoweredBy from "../../components/PoweredBy";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -109,6 +110,7 @@ function Login() {
                 </div>
               </div>
             </div>
+            <PoweredBy className="text-center text-white-50 mt-3" />
           </div>
         </div>
       </div>
