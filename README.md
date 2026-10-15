@@ -24,12 +24,14 @@ There's no server, so the contact form and "Plan this tour" buttons open WhatsAp
 | What | File |
 |---|---|
 | Phone, email, address, WhatsApp, Facebook, owner | [`src/data/site.js`](Frontend/frontend-app/src/data/site.js) |
-| Tour packages and itineraries | [`src/data/packages.js`](Frontend/frontend-app/src/data/packages.js) |
-| Blog posts | [`src/data/blogs.js`](Frontend/frontend-app/src/data/blogs.js) (add each article's paragraphs as `body`) |
-| Photos | [`src/assets/photos/`](Frontend/frontend-app/src/assets/photos) (expected file names are in the README there) |
+| Home, About and Contact wording | [`src/data/pages.js`](Frontend/frontend-app/src/data/pages.js) |
+| Tour packages, itineraries and the Ramayana Trail | [`src/data/packages.js`](Frontend/frontend-app/src/data/packages.js) |
+| Blog list (titles, dates, cover photos) | [`src/data/blogs.js`](Frontend/frontend-app/src/data/blogs.js) |
+| Blog article text | [`src/content/blogs/<slug>.json`](Frontend/frontend-app/src/content/blogs) |
+| Photos | [`src/assets/photos/`](Frontend/frontend-app/src/assets/photos) (referenced by file name) |
 | Gallery | [`src/assets/gallery/`](Frontend/frontend-app/src/assets/gallery) (every image in the folder is shown) |
 
-Page text that still needs the owner's own wording: the About page, and the article text of each blog post. Both come from the WordPress export.
+All of this content was imported from the old site's WordPress export in October 2026.
 
 ## Running it locally
 
