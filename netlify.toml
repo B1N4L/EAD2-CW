@@ -1,14 +1,14 @@
-# Netlify deploys only the React frontend, in demo mode (no backend services).
+# Netlify settings for the Tours 999 static site (the React app in Frontend/frontend-app).
 [build]
   base = "Frontend/frontend-app"
   command = "npm run build"
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
-  VITE_DEMO_MODE = "true"
+  NODE_VERSION = "22"
 
-# Single-page app: let React Router handle every path, so refreshing /bookings works.
+# Single-page app: let React Router handle every path, so old links like /about/ and
+# /5-day-sri-lanka-tour-package/ load the right page.
 [[redirects]]
   from = "/*"
   to = "/index.html"

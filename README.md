@@ -1,52 +1,46 @@
-# Saman Tours — Tour Management System
+# Tours 999 — website
 
-A group coursework project (EAD2) for a fictional Sri Lankan tour company. Customers browse tour packages, place bookings and leave reviews; staff log in to an admin dashboard to manage employees, bookings, vehicles, reviews and tour fleets.
+Static website for [Tours 999](https://tours999.com), a Sri Lankan tour company offering private tours with a driver. It replaces the old WordPress site and runs on GitHub + Netlify only: no server, database or plugins.
 
-**Live demo:** _add your Netlify link here_
+The site lives in [`Frontend/frontend-app`](Frontend/frontend-app). The Spring Boot folders (`adminBackend`, `booking-backend-app`, `vehicleBackend`, `ReviewBackend`, `FleetBackend`) are from the earlier EAD2 coursework project and aren't used by the site.
 
-> The live demo runs the React frontend only. The Spring Boot services aren't hosted, so the demo answers API calls in the browser with sample data (see [Demo mode](#demo-mode)). The login page shows a demo account, and **Reset demo data** in the top banner restores the sample data.
+## Pages
 
-## Architecture
+| Page | URL |
+|---|---|
+| Home | `/` |
+| Tour packages | `/itinerary` |
+| 5, 7, 8 and 10-day tours | `/5-day-sri-lanka-tour-package`, `/7-day-sri-lanka-tour-package`, `/8-day-sri-lanka-tour-package`, `/10-days-tour-package` |
+| Ramayana Trail | `/ramayana-trail-sri-lanka` |
+| About, Gallery, Blogs, Contact | `/about`, `/gallery`, `/blogs`, `/contact` |
+| Blog posts | `/<post-slug>` (same slugs as the old site) |
 
-Five independent Spring Boot microservices, each with its own MySQL database, and a React single-page app that calls them over REST.
+All URLs match the old WordPress site, so existing links and search results keep working.
 
-| Service | Port | Base path | Responsibility |
-|---|---|---|---|
-| Employee | 8081 | `/employee-api` | Staff records, login, list of available guides |
-| Booking | 8082 | `/booking-api` | Customer tour bookings |
-| Vehicle | 8083 | `/vehicle-api` | Vehicle records, list of available vehicles |
-| Review | 8084 | `/review-api` | Customer reviews |
-| Fleet | 8085 | `/fleet-api` | Tour groups that combine guides, vehicles and bookings |
+There's no server, so the contact form and "Plan this tour" buttons open WhatsApp (or email) with the visitor's message already filled in.
 
-Each service follows a controller → service → repository layout using Spring Data JPA, with JPQL queries for the "available guides" and "available vehicles" endpoints. The fleet screens pull data from three other services to build a tour group.
+## Editing content
 
-## Tech stack
+| What | File |
+|---|---|
+| Phone, email, address, WhatsApp, Facebook, owner | [`src/data/site.js`](Frontend/frontend-app/src/data/site.js) |
+| Tour packages and itineraries | [`src/data/packages.js`](Frontend/frontend-app/src/data/packages.js) |
+| Blog posts | [`src/data/blogs.js`](Frontend/frontend-app/src/data/blogs.js) (add each article's paragraphs as `body`) |
+| Photos | [`src/assets/photos/`](Frontend/frontend-app/src/assets/photos) (expected file names are in the README there) |
+| Gallery | [`src/assets/gallery/`](Frontend/frontend-app/src/assets/gallery) (every image in the folder is shown) |
 
-- **Backend:** Java 17, Spring Boot 3.3 (Web, Data JPA, Validation), MySQL, Maven
-- **Frontend:** React 18, Vite 5, React Router 6, Axios, Bootstrap 5 / React-Bootstrap, React Icons
+Page text that still needs the owner's own wording: the About page, and the article text of each blog post. Both come from the WordPress export.
 
-## Running it locally (full stack)
-
-1. Start MySQL and create the databases `employeedb`, `bookingdb`, `vehicledb`, `reviewdb` and `fleetdb` (the services connect as `root` / `root`; change this in each `application.properties`).
-2. Start each service from its folder:
-   ```bash
-   ./mvnw spring-boot:run
-   ```
-   Folders: `adminBackend/employee-backend-app`, `booking-backend-app`, `vehicleBackend/vehicle-backend-app`, `ReviewBackend/review-backend-app`, `FleetBackend/fleet-backend-app`.
-3. Start the frontend:
-   ```bash
-   cd Frontend/frontend-app
-   npm install
-   npm run dev
-   ```
-   Open http://localhost:5173.
-
-## Demo mode
-
-When the frontend is built with `VITE_DEMO_MODE=true` (set in [`netlify.toml`](netlify.toml)), a custom Axios adapter in [`src/demo/demoApi.js`](Frontend/frontend-app/src/demo/demoApi.js) intercepts the calls to the five services and serves them from `localStorage`, following the same rules as the real endpoints. Sample data lives in [`src/demo/seed.js`](Frontend/frontend-app/src/demo/seed.js). Without that variable the app talks to the real services as before.
-
-To try demo mode locally without the backends:
+## Running it locally
 
 ```bash
-VITE_DEMO_MODE=true npm run dev
+cd Frontend/frontend-app
+npm install
+npm run dev
 ```
+
+Open http://localhost:5173. `npm run build` produces the static files in `dist/`; [`netlify.toml`](netlify.toml) has the build settings for Netlify.
+
+## Tech
+
+React 18, Vite 5, React Router 6, Bootstrap 5 / React-Bootstrap, React Icons.

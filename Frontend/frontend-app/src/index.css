@@ -1,4 +1,4 @@
-/* Saman Tours theme: overrides on top of Bootstrap 5.3 (loaded first in App.jsx). */
+/* Site theme: overrides on top of Bootstrap 5.3 (loaded first in App.jsx). */
 
 :root {
   --st-teal: #0f766e;
@@ -7,7 +7,7 @@
   --st-sand: #fbf7f0;
   --st-amber: #f59e0b;
   --st-muted: #64748b;
-  --st-shell: #f3f6f6;
+  --st-whatsapp: #25d366;
 
   --bs-primary: #0f766e;
   --bs-primary-rgb: 15, 118, 110;
@@ -66,6 +66,20 @@ h1, h2, h3, h4, h5, .display-4, .navbar-brand {
   font-weight: 600;
 }
 
+.btn-whatsapp {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #1faa55;
+  --bs-btn-border-color: #1faa55;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #178c45;
+  --bs-btn-hover-border-color: #178c45;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #12733a;
+  --bs-btn-active-border-color: #12733a;
+  --bs-btn-focus-shadow-rgb: 31, 170, 85;
+  font-weight: 600;
+}
+
 .btn-icon {
   display: inline-flex;
   align-items: center;
@@ -83,7 +97,7 @@ h1, h2, h3, h4, h5, .display-4, .navbar-brand {
   font-size: 0.9rem;
 }
 
-/* Public site */
+/* Layout */
 .site-nav {
   background: var(--st-teal-deep);
 }
@@ -109,12 +123,58 @@ h1, h2, h3, h4, h5, .display-4, .navbar-brand {
   font-size: 1rem;
 }
 
+.site-footer {
+  background: var(--st-teal-deep);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.site-footer a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: #fff;
+}
+
+.powered-by a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.powered-by a:hover {
+  text-decoration: underline;
+}
+
+.whatsapp-float {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1030;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--st-whatsapp);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease;
+}
+
+.whatsapp-float:hover {
+  color: #fff;
+  transform: scale(1.06);
+}
+
+/* Sections */
 .hero {
   color: #fff;
   background:
-    linear-gradient(115deg, rgba(4, 47, 46, 0.92) 0%, rgba(15, 118, 110, 0.6) 60%, rgba(15, 118, 110, 0.25) 100%),
-    url("https://www.covelanka.com/wp-content/uploads/2024/05/Nuwara-Eliya1-min.jpg") center / cover no-repeat,
-    var(--st-teal-deep);
+    linear-gradient(115deg, rgba(4, 47, 46, 0.92) 0%, rgba(15, 118, 110, 0.6) 60%, rgba(15, 118, 110, 0.3) 100%),
+    var(--hero-image, none) center / cover no-repeat,
+    linear-gradient(135deg, #042f2e, #0f766e);
   padding: 6rem 0;
 }
 
@@ -140,6 +200,25 @@ h1, h2, h3, h4, h5, .display-4, .navbar-brand {
   background: var(--st-sand);
 }
 
+.page-band {
+  background: var(--st-sand);
+  border-bottom: 1px solid #efe7da;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--bs-border-radius-lg);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.stat-value {
+  font-family: "Poppins", var(--bs-body-font-family);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
 .tour-card {
   border: 0;
   border-radius: var(--bs-border-radius-lg);
@@ -153,8 +232,8 @@ h1, h2, h3, h4, h5, .display-4, .navbar-brand {
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.14);
 }
 
-.tour-card img {
-  height: 220px;
+.tour-card .card-img-top {
+  height: 210px;
   object-fit: cover;
 }
 
@@ -180,182 +259,101 @@ h1, h2, h3, h4, h5, .display-4, .navbar-brand {
   font-size: 1.4rem;
 }
 
-.quote-card {
-  border: 0;
-  border-radius: var(--bs-border-radius-lg);
-  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
-}
-
-.quote-card .quote-icon {
-  color: var(--st-amber);
-}
-
 .cta-band {
   background: linear-gradient(115deg, var(--st-teal-deep), var(--st-teal));
   color: #fff;
   border-radius: var(--bs-border-radius-lg);
 }
 
-.site-footer {
-  background: var(--st-teal-deep);
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.site-footer a {
-  color: rgba(255, 255, 255, 0.85);
-  text-decoration: none;
-}
-
-.site-footer a:hover {
-  color: #fff;
-}
-
-.powered-by a {
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.powered-by a:hover {
-  text-decoration: underline;
-}
-
-.auth-page .powered-by a {
-  color: #fff;
-}
-
-.page-band {
-  background: var(--st-sand);
-  border-bottom: 1px solid #efe7da;
-}
-
-/* Login */
-.auth-page {
-  min-height: 100vh;
-  background:
-    linear-gradient(135deg, rgba(4, 47, 46, 0.94), rgba(15, 118, 110, 0.8)),
-    url("https://www.covelanka.com/wp-content/uploads/2024/05/Wildlife.jpg") center / cover no-repeat,
-    var(--st-teal-deep);
-}
-
-.auth-card {
-  border: 0;
-  border-radius: var(--bs-border-radius-lg);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
-}
-
-/* Admin */
-.admin-shell {
-  min-height: 100vh;
-  background: var(--st-shell);
-}
-
-.admin-nav {
-  background: var(--st-teal-deep);
-}
-
-.admin-nav .nav-link {
-  color: rgba(255, 255, 255, 0.75);
-  border-radius: 0.5rem;
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important;
-}
-
-.admin-nav .nav-link:hover {
-  color: #fff;
-}
-
-.admin-nav .nav-link.active {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.panel {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: var(--bs-border-radius-lg);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-}
-
-.stat-card {
+/* Photos */
+.feature-photo,
+.detail-photo,
+.gallery-thumb,
+.profile-photo {
   display: block;
-  color: inherit;
-  text-decoration: none;
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--bs-border-radius-lg);
+}
+
+.feature-photo {
+  aspect-ratio: 4 / 3;
+}
+
+.detail-photo {
+  aspect-ratio: 16 / 9;
+}
+
+.gallery-thumb {
+  aspect-ratio: 1 / 1;
+}
+
+.profile-photo {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(135deg, #115e59, #0f766e 55%, #14b8a6);
+  min-height: 160px;
+}
+
+.tour-card .photo-placeholder.card-img-top {
+  border-radius: 0;
+}
+
+/* Itinerary timeline */
+.timeline-item {
+  position: relative;
+  padding-left: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-left: 2px solid #ccfbf1;
+  margin-left: 0.4rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -0.45rem;
+  top: 0.2rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--st-teal);
+  box-shadow: 0 0 0 4px #ccfbf1;
+}
+
+.timeline-day {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--st-amber);
+  margin-bottom: 0.15rem;
+}
+
+/* Blog */
+.blog-card {
   transition: border-color 0.15s ease, transform 0.15s ease;
 }
 
-.stat-card:hover {
+.blog-card:hover {
   border-color: #5eada5;
   transform: translateY(-2px);
-  color: inherit;
-}
-
-.stat-card .stat-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.75rem;
-  background: #ccfbf1;
-  color: var(--st-teal);
-}
-
-.stat-value {
-  font-family: "Poppins", var(--bs-body-font-family);
-  font-size: 1.75rem;
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.data-table {
-  margin-bottom: 0;
-}
-
-.data-table thead th {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--st-muted);
-  background: #f8fafc;
-  white-space: nowrap;
-}
-
-.data-table td,
-.data-table th {
-  padding: 0.85rem 1rem;
-}
-
-.data-table tbody tr:last-child td {
-  border-bottom: 0;
-}
-
-.cell-sub {
-  display: block;
-  font-size: 0.8rem;
-  color: var(--st-muted);
-}
-
-.text-clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.detail-list dt {
-  font-weight: 500;
-  color: var(--st-muted);
-}
-
-.detail-list dd {
-  margin-bottom: 0.9rem;
-}
-
-.form-section-title {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--st-muted);
 }
