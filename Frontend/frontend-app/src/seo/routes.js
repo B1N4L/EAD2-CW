@@ -68,7 +68,7 @@ const STATIC_PAGES = {
   "/about": {
     title: "About Us",
     description: clip(ABOUT.intro[0]),
-    image: SITE.owner.photo,
+    image: ABOUT.photos[0],
     jsonLd: [AGENCY, breadcrumbs(["Home", "/"], ["About us", "/about"])],
   },
   "/gallery": {
@@ -171,12 +171,15 @@ export function metaFor(pathname) {
   if (!meta && findBlog(slug)) meta = blogMeta(findBlog(slug));
   if (!meta) return { ...NOT_FOUND, type: "website", image: imageUrl(HOME.heroPhoto), jsonLd: [] };
 
+  const imageName = photoUrl(meta.image) ? meta.image : HOME.heroPhoto;
   return {
     type: "website",
     ...meta,
     title: path === "/" ? meta.title : `${meta.title} | ${SITE.name}`,
     canonical: canonicalFor(path),
-    image: imageUrl(meta.image) ?? imageUrl(HOME.heroPhoto),
+    // The build swaps in a 1200x630 JPEG from public/share/ when one exists for this photo.
+    imageName,
+    image: imageUrl(imageName),
     jsonLd: meta.jsonLd.map((item) => ({ "@context": "https://schema.org", ...item })),
   };
 }

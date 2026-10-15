@@ -18,6 +18,16 @@ const esc = (s = "") => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;")
 // JSON inside <script> must not contain "</script>" or similar.
 const json = (value) => JSON.stringify(value).replace(/</g, "\\u003c");
 
+// Link previews (WhatsApp, Facebook, X) use a 1200x630 JPEG from public/share/ when there is one
+// for the page's photo; otherwise the photo itself.
+function shareImage(meta) {
+  const jpg = meta.imageName?.replace(/\.[^.]+$/, ".jpg");
+  if (jpg && fs.existsSync(path.join(appDir, "public", "share", jpg))) {
+    return { url: `${SITE_URL}/share/${jpg}`, width: 1200, height: 630 };
+  }
+  return meta.image ? { url: meta.image } : null;
+}
+
 function head(meta, preload) {
   const tags = [
     `<title>${esc(meta.title)}</title>`,
@@ -38,7 +48,12 @@ function head(meta, preload) {
       `<meta name="twitter:title" content="${esc(meta.title)}" />`,
       `<meta name="twitter:description" content="${esc(meta.description)}" />`,
     );
-    if (meta.image) tags.push(`<meta property="og:image" content="${esc(meta.image)}" />`, `<meta name="twitter:image" content="${esc(meta.image)}" />`);
+    const share = shareImage(meta);
+    if (share) {
+      tags.push(`<meta property="og:image" content="${esc(share.url)}" />`);
+      if (share.width) tags.push(`<meta property="og:image:width" content="${share.width}" />`, `<meta property="og:image:height" content="${share.height}" />`, `<meta property="og:image:type" content="image/jpeg" />`);
+      tags.push(`<meta property="og:image:alt" content="${esc(meta.title)}" />`, `<meta name="twitter:image" content="${esc(share.url)}" />`);
+    }
     if (meta.published) tags.push(`<meta property="article:published_time" content="${esc(meta.published)}" />`);
     for (const item of meta.jsonLd) tags.push(`<script type="application/ld+json">${json(item)}</script>`);
   }

@@ -49,6 +49,8 @@ Open http://localhost:5173. `npm run build` produces the static files in `dist/`
 
 The site address used in canonical links and the sitemap is `url` in [`src/data/site.js`](Frontend/frontend-app/src/data/site.js).
 
+Link previews use 1200×630 JPEGs from [`public/share/`](Frontend/frontend-app/public/share), named after the page's photo (e.g. `sigiriya_img_02.webp` → `share/sigiriya_img_02.jpg`). A page whose photo has no JPEG there falls back to the photo itself, so add one when you add a new tour or article.
+
 ## Tech
 
 React 18, Vite 5, React Router 6, Bootstrap 5 / React-Bootstrap, React Icons.
