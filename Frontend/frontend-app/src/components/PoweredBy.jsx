@@ -1,4 +1,3 @@
-import React from "react";
 
 // "Powered by Trio Branch" credit shown at the bottom of every page.
 export default function PoweredBy({ className = "" }) {

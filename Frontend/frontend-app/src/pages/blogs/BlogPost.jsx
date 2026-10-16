@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import SiteLayout from "../../components/SiteLayout";
@@ -38,7 +38,7 @@ export default function BlogPost({ post }) {
     const load = ARTICLES[`../../content/blogs/${post.slug}.json`];
     (load ? load() : Promise.resolve([])).then((data) => { if (!cancelled) setBlocks(data); });
     return () => { cancelled = true; };
-  }, [post.slug]);
+  }, [blocks, post.slug]);
 
   // Links inside the article to other pages on this site open without a full page reload.
   const onArticleClick = (e) => {

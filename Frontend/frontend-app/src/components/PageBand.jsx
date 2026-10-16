@@ -1,4 +1,3 @@
-import React from "react";
 
 // Sand-coloured title band at the top of inner pages.
 export default function PageBand({ eyebrow, title, children }) {

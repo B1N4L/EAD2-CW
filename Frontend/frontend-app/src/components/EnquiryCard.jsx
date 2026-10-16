@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaEnvelope, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import { SITE, whatsappLink } from "../data/site";
@@ -9,7 +8,7 @@ export default function EnquiryCard({ tourTitle, slug }) {
     <div className="panel p-4 sticky-lg-top" style={{ top: "1.5rem" }}>
       <h2 className="h5 mb-2">Plan this tour</h2>
       <p className="small text-secondary mb-4">
-        Tell us your dates and group size. We'll reply with a quote and can adjust the route to suit you.
+        Tell us your dates and group size. We&apos;ll reply with a quote and can adjust the route to suit you.
       </p>
       <div className="d-grid gap-2">
         <a className="btn btn-whatsapp btn-icon justify-content-center" target="_blank" rel="noopener noreferrer"

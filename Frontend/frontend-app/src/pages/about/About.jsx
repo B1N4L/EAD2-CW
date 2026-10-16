@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaBullseye, FaEye, FaFacebookF } from "react-icons/fa";
 import SiteLayout from "../../components/SiteLayout";

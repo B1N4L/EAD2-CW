@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaCamera } from "react-icons/fa";
 import SiteLayout from "../../components/SiteLayout";
@@ -18,7 +17,7 @@ export default function Gallery() {
           <div className="panel p-5 text-center">
             <FaCamera size={36} className="text-primary mb-3" />
             <h2 className="h5">Photos coming soon</h2>
-            <p className="text-secondary mb-4">We're adding photos from recent tours. In the meantime, have a look at our tour packages.</p>
+            <p className="text-secondary mb-4">We&apos;re adding photos from recent tours. In the meantime, have a look at our tour packages.</p>
             <Link className="btn btn-primary" to="/itinerary">See tour packages</Link>
           </div>
         ) : (

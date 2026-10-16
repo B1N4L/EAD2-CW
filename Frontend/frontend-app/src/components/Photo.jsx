@@ -1,4 +1,3 @@
-import React from "react";
 import { FaMountain } from "react-icons/fa";
 import { photoUrl } from "../data/photos";
 

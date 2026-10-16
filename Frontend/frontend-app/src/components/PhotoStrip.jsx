@@ -1,4 +1,3 @@
-import React from "react";
 import Photo from "./Photo";
 
 // A row of square photos (used for a tour's extra photos).

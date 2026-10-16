@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FaEnvelope, FaFacebookF, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import SiteLayout from "../../components/SiteLayout";
@@ -54,7 +54,7 @@ export default function Contact() {
   return (
     <SiteLayout>
       <PageBand eyebrow="Contact us" title="Let's plan your trip">
-        Send us a message with your dates, group size and the places you'd like to see. {CONTACT.responseNote}
+        Send us a message with your dates, group size and the places you&apos;d like to see. {CONTACT.responseNote}
       </PageBand>
 
       <div className="container py-5">

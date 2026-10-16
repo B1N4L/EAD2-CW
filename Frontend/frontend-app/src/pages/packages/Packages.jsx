@@ -1,4 +1,3 @@
-import React from "react";
 import SiteLayout from "../../components/SiteLayout";
 import PageBand from "../../components/PageBand";
 import PackageCard from "../../components/PackageCard";
@@ -18,7 +17,7 @@ export default function Packages() {
     <SiteLayout>
       <PageBand eyebrow={HOME.packagesEyebrow} title={HOME.packagesTitle}>
         Every tour is private, with your own air-conditioned vehicle and English-speaking driver-guide.
-        Use these as a starting point and we'll adjust the days and stops to suit you.
+        Use these as a starting point and we&apos;ll adjust the days and stops to suit you.
       </PageBand>
 
       <div className="container py-5">

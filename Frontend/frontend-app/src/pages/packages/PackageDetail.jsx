@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaRegClock, FaRoute, FaUserFriends, FaUserTie } from "react-icons/fa";
 import SiteLayout from "../../components/SiteLayout";
@@ -51,7 +50,7 @@ export default function PackageDetail({ pkg }) {
               <Itinerary days={pkg.itinerary} />
             </div>
 
-            <h2 className="h4 mb-4">What's included</h2>
+            <h2 className="h4 mb-4">What&apos;s included</h2>
             <div className="panel p-4 mb-5">
               <IncludedList includes={pkg.includes} excludes={pkg.excludes} />
             </div>

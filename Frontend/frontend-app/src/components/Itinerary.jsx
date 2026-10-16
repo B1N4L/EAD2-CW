@@ -1,4 +1,3 @@
-import React from "react";
 
 // Day-by-day timeline for a tour. Each point is { label?, text?, sub?: [...] }.
 export default function Itinerary({ days }) {

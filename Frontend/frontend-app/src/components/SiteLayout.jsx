@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { FaEnvelope, FaFacebookF, FaGlobeAsia, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import SiteLayout from "../../components/SiteLayout";
 import Photo from "../../components/Photo";
@@ -63,7 +63,7 @@ export default function RamayanaTrail() {
               </div>
             </div>
 
-            <h2 className="h4 mb-4">What's included</h2>
+            <h2 className="h4 mb-4">What&apos;s included</h2>
             <div className="panel p-4 mb-5">
               <IncludedList includes={RAMAYANA.includes} excludes={RAMAYANA.excludes} />
             </div>

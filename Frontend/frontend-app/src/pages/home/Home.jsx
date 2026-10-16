@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from "react-router-dom";
 import { FaArrowRight, FaCarSide, FaComments, FaGlobeAsia, FaHandshake, FaMapMarkedAlt, FaPlaneArrival, FaRegCalendarAlt, FaTags, FaUserTie, FaWhatsapp } from 'react-icons/fa';
 import SiteLayout from '../../components/SiteLayout';
@@ -156,7 +155,7 @@ function Home() {
           <div className="cta-band p-4 p-lg-5 d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
             <div>
               <h2 className="h3 mb-1">Ready to plan your Sri Lanka trip?</h2>
-              <p className="mb-0 opacity-75">Send us your dates and group size and we'll reply with a route and a quote.</p>
+              <p className="mb-0 opacity-75">Send us your dates and group size and we&apos;ll reply with a route and a quote.</p>
             </div>
             <a className="btn btn-accent btn-lg btn-icon" href={whatsappLink("Hi Tours 999, I'd like a quote for a tour.")} target="_blank" rel="noopener noreferrer">
               <FaWhatsapp /> Get a quote

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaRegClock } from "react-icons/fa";
 import Photo from "./Photo";
